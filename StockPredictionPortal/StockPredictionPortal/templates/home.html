@@ -8,22 +8,32 @@
 <body>
     <h1>Home page</h1>
     {% if not request.user.is_authenticated %}
-    <a href="{% url "login" %}">
-        <button type = "button">login</button>
-    </a>
-    <a href="{% url "signup" %}">
-        <button type = "button">signup</button>
-    </a>
+        <a href="{% url "login" %}">
+            <button type="button">login</button>
+        </a>
+        <a href="{% url "signup" %}">
+            <button type="button">signup</button>
+        </a>
+        <h2>Apple stock Prediction</h2>
+        <img src="data:image/png;base64,{{ apple }}" alt="Apple Stock Plot">
+    {% else %}
+        <form action="{% url "logout" %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
 
-    {% endif %}
-    
-    {% if request.user.is_authenticated  %}
-    <form action="{% url "logout" %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    <h2>Apple stock Prediction</h2>
-    <img src="data:image/png;base64,{{ chart }}" alt="Stock Prediction Plot">    
+        <form method="get">
+            <label for="ticker">Enter stock ticker:</label>
+            <input type="text" id="ticker" name="ticker" value="{{ ticker }}" placeholder="e.g. AAPL, TSLA, INFY.NS" required>
+            <button type="submit">Show</button>
+        </form>
+
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% elif chart %}
+            <h3>Showing prediction for {{ ticker }}</h3>
+            <img src="data:image/png;base64,{{ chart }}" alt="Stock Prediction Plot">
+        {% endif %}
     {% endif %}
 </body>
 </html>
