@@ -21,9 +21,9 @@
     <form action="{% url "logout" %}" method="POST">
         {% csrf_token %}
         <button type="submit">Logout</button>
-    {% endif %}
-
-    
     </form>
+    <h2>Apple stock Prediction</h2>
+    <img src="data:image/png;base64,{{ chart }}" alt="Stock Prediction Plot">    
+    {% endif %}
 </body>
 </html>
