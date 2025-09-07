@@ -1,3 +1,3 @@
-Stock prediction portal created in python laguage using keras from tensorflow 
-uses django for the backend
+Stock prediction portal created in python laguage using keras from tensorflow <br>
+uses django for the backend <br>
 fronted is incomplete for now 
